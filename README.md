@@ -20,7 +20,27 @@ A shell script that safely identifies and deletes stale Git branches — both lo
 
 ## Installation
 
-Clone this repository (or download the script directly):
+### Option A: Shell alias (recommended)
+
+Add this function to your `~/.zshrc` (or `~/.bashrc`):
+
+```bash
+git-cleanup() {
+  bash <(curl -fsSL https://raw.githubusercontent.com/dil-anovosz/git-branch-cleanup/main/cleanup-branches.sh) "$@"
+}
+```
+
+Then reload your shell:
+
+```bash
+source ~/.zshrc
+```
+
+This lets you run `git-cleanup` from any Git repository without cloning or copying anything. The script is fetched directly from GitHub each time, so updates take effect immediately.
+
+### Option B: Clone and copy
+
+Clone this repository:
 
 ```bash
 git clone https://github.com/dil-anovosz/git-branch-cleanup.git
@@ -33,18 +53,17 @@ cp git-branch-cleanup/cleanup-branches.sh /path/to/your/repo/
 chmod +x /path/to/your/repo/cleanup-branches.sh
 ```
 
-Or run it directly from the clone by navigating to your target repo first.
-
 ## Quick Start
 
 ```bash
-# 1. Navigate to your Git repository
+# Using the alias (Option A):
 cd /path/to/your/repo
+git-cleanup                # dry-run (default)
+git-cleanup --execute      # actually delete branches
 
-# 2. Preview what would be deleted (dry-run, the default)
+# Using the local script (Option B):
+cd /path/to/your/repo
 ./cleanup-branches.sh
-
-# 3. Review the output, then execute for real
 ./cleanup-branches.sh --execute
 ```
 
