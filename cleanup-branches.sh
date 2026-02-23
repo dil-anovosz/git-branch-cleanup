@@ -201,7 +201,7 @@ else
           if [[ "$FORCE" == true ]]; then
             if [[ "$MODE" == "execute" ]]; then
               printf "${YELLOW}Branch '%s' has no PR. Delete? [y/N]: ${RESET}" "$branch"
-              read -r confirm
+              read -r confirm </dev/tty
               if [[ "$confirm" =~ ^[Yy]$ ]]; then
                 action "Deleting local branch (no PR, forced): $branch"
                 git branch -D "$branch"
@@ -283,7 +283,7 @@ else
           if [[ "$FORCE" == true ]]; then
             if [[ "$MODE" == "execute" ]]; then
               printf "${YELLOW}Remote branch '%s' has no PR. Delete? [y/N]: ${RESET}" "$branch"
-              read -r confirm
+              read -r confirm </dev/tty
               if [[ "$confirm" =~ ^[Yy]$ ]]; then
                 action "Deleting remote branch (no PR, forced): $branch"
                 git push origin --delete "$branch"
